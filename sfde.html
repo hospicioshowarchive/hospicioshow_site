@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SFDE</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 75% 20%,
+                    #111a2b 0%,
+                    #070b13 35%,
+                    #03050a 70%,
+                    #010204 100%
+                );
+
+            color: white;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================
+           FUNDO
+        ========================== */
+
+        .background {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: -1;
+
+            overflow: hidden;
+        }
+
+
+        .light {
+
+            position: absolute;
+
+            width: 700px;
+
+            height: 700px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(45, 75, 120, 0.10),
+                    transparent 70%
+                );
+
+            filter: blur(50px);
+
+            animation:
+                lightMove 18s
+                ease-in-out
+                infinite alternate;
+        }
+
+
+        .light.one {
+
+            top: -350px;
+
+            right: -200px;
+        }
+
+
+        .light.two {
+
+            bottom: -400px;
+
+            left: -300px;
+
+            animation-delay: -7s;
+        }
+
+
+        @keyframes lightMove {
+
+            from {
+
+                transform:
+                    translate(0, 0);
+            }
+
+            to {
+
+                transform:
+                    translate(-120px, 80px);
+            }
+        }
+
+
+        /* =========================
+           CABEÇALHO
+        ========================== */
+
+        .header {
+
+            height: 110px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 22px;
+
+            padding-left: 65px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.035);
+
+            background:
+                rgba(0,0,0,0.18);
+
+            backdrop-filter:
+                blur(10px);
+        }
+
+
+        /* =========================
+           BOTÃO VOLTAR
+        ========================== */
+
+        .back-button {
+
+            width: 43px;
+
+            height: 43px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            color:
+                rgba(255,255,255,0.75);
+
+            text-decoration: none;
+
+            font-size: 22px;
+
+            background:
+                rgba(255,255,255,0.035);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.10);
+
+            transition:
+                transform 0.4s ease,
+                background 0.4s ease,
+                color 0.4s ease;
+        }
+
+
+        .back-button:hover {
+
+            transform:
+                scale(1.08);
+
+            color: white;
+
+            background:
+                rgba(255,255,255,0.08);
+        }
+
+
+        /* =========================
+           TÍTULO
+        ========================== */
+
+        .channel-title h1 {
+
+            font-size: 31px;
+
+            font-weight: 300;
+
+            letter-spacing: 6px;
+        }
+
+
+        .channel-title p {
+
+            margin-top: 4px;
+
+            font-size: 12px;
+
+            letter-spacing: 2px;
+
+            color:
+                rgba(255,255,255,0.35);
+        }
+
+
+        /* =========================
+           LISTA DE EPISÓDIOS
+        ========================== */
+
+        .episodes-container {
+
+            width: 900px;
+
+            margin-left: 65px;
+
+            padding-top: 40px;
+
+            padding-bottom: 100px;
+
+            animation:
+                listEnter 1s ease forwards;
+        }
+
+
+        @keyframes listEnter {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(20px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        /* =========================
+           EPISÓDIO
+        ========================== */
+
+        .episode {
+
+            width: 850px;
+
+            min-height: 160px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 25px;
+
+            padding: 10px;
+
+            margin-bottom: 18px;
+
+            border-radius: 8px;
+
+            color: white;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            background:
+                rgba(255,255,255,0.012);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.025);
+
+            transition:
+
+                transform 0.45s
+                cubic-bezier(0.2,0.8,0.2,1),
+
+                background 0.45s ease,
+
+                border-color 0.45s ease,
+
+                box-shadow 0.45s ease;
+        }
+
+
+        .episode:hover {
+
+            transform:
+                scale(1.025);
+
+            background:
+                rgba(255,255,255,0.045);
+
+            border-color:
+                rgba(255,255,255,0.08);
+
+            box-shadow:
+                0 15px 40px
+                rgba(0,0,0,0.35);
+        }
+
+
+        /* =========================
+           THUMBNAIL
+        ========================== */
+
+        .thumbnail {
+
+            width: 280px;
+
+            height: 158px;
+
+            flex-shrink: 0;
+
+            position: relative;
+
+            overflow: hidden;
+
+            border-radius: 7px;
+
+            background:
+                #080b11;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,0.45);
+        }
+
+
+        .thumbnail img {
+
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            transition:
+
+                transform 0.7s
+                cubic-bezier(0.2,0.8,0.2,1),
+
+                filter 0.6s ease;
+        }
+
+
+        .episode:hover .thumbnail img {
+
+            transform:
+                scale(1.045);
+
+            filter:
+                brightness(0.65);
+        }
+
+
+        /* =========================
+           VÍDEO DE PREVIEW
+        ========================== */
+
+        .preview-video {
+
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            opacity: 0;
+
+            z-index: 2;
+
+            pointer-events: none;
+
+            transition:
+                opacity 0.8s ease;
+        }
+
+
+        .episode:hover .preview-video {
+
+            opacity: 1;
+        }
+
+
+        /* =========================
+           PLAY
+        ========================== */
+
+        .play-icon {
+
+            position: absolute;
+
+            z-index: 5;
+
+            left: 50%;
+
+            top: 50%;
+
+            width: 45px;
+
+            height: 45px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            transform:
+                translate(-50%, -50%)
+                scale(0.8);
+
+            border-radius: 50%;
+
+            background:
+                rgba(0,0,0,0.60);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.25);
+
+            opacity: 0;
+
+            transition:
+
+                opacity 0.4s ease,
+
+                transform 0.4s ease;
+        }
+
+
+        .episode:hover .play-icon {
+
+            opacity: 1;
+
+            transform:
+                translate(-50%, -50%)
+                scale(1);
+        }
+
+
+        /* =========================
+           INFORMAÇÕES
+        ========================== */
+
+        .episode-info {
+
+            align-self: stretch;
+
+            padding-top: 20px;
+
+            padding-right: 20px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+        }
+
+
+        .episode-number {
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            color:
+                rgba(255,255,255,0.30);
+
+            margin-bottom: 7px;
+        }
+
+
+        .episode-info h2 {
+
+            font-size: 20px;
+
+            font-weight: 400;
+
+            letter-spacing: 0.5px;
+
+            margin-bottom: 8px;
+
+            transition:
+                text-shadow 0.4s ease;
+        }
+
+
+        .episode:hover .episode-info h2 {
+
+            text-shadow:
+                0 0 12px
+                rgba(255,255,255,0.15);
+        }
+
+
+        /* =========================
+           DESCRIÇÃO
+        ========================== */
+
+        .episode-description {
+
+            font-size: 12px;
+
+            line-height: 1.55;
+
+            font-weight: 300;
+
+            color:
+                rgba(255,255,255,0.45);
+
+            max-width: 450px;
+
+            opacity: 0;
+
+            transform:
+                translateY(8px);
+
+            transition:
+
+                opacity 0.6s ease,
+
+                transform 0.6s
+                cubic-bezier(0.2,0.8,0.2,1);
+        }
+
+
+        .episode:hover .episode-description {
+
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+
+        /* =========================
+           RESPONSIVIDADE
+        ========================== */
+
+        @media (max-width: 950px) {
+
+            .header {
+
+                padding-left: 30px;
+            }
+
+
+            .episodes-container {
+
+                width: auto;
+
+                margin:
+                    0 30px;
+            }
+
+
+            .episode {
+
+                width: 100%;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .header {
+
+                height: 90px;
+
+                padding:
+                    0 20px;
+            }
+
+
+            .channel-title h1 {
+
+                font-size: 25px;
+
+                letter-spacing: 4px;
+            }
+
+
+            .episodes-container {
+
+                margin:
+                    0 15px;
+
+                padding-top: 25px;
+            }
+
+
+            .episode {
+
+                min-height: 100px;
+
+                gap: 14px;
+
+                padding: 7px;
+            }
+
+
+            .thumbnail {
+
+                width: 145px;
+
+                height: 82px;
+            }
+
+
+            .episode-info {
+
+                padding:
+                    8px 5px;
+            }
+
+
+            .episode-info h2 {
+
+                font-size: 15px;
+
+                margin-bottom: 5px;
+            }
+
+
+            .episode-number {
+
+                font-size: 8px;
+
+                margin-bottom: 4px;
+            }
+
+
+            .episode-description {
+
+                font-size: 10px;
+
+                line-height: 1.4;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         FUNDO
+    ========================== -->
+
+    <div class="background">
+
+        <div class="light one"></div>
+
+        <div class="light two"></div>
+
+    </div>
+
+
+
+    <!-- =========================
+         CABEÇALHO
+    ========================== -->
+
+    <header class="header">
+
+
+        <a
+            href="index.html"
+            class="back-button"
+        >
+
+            ←
+
+        </a>
+
+
+        <div class="channel-title">
+
+            <h1>SE FODE AE</h1>
+
+            <p>
+                TODOS OS EPISÓDIOS
+            </p>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================
+         EPISÓDIOS
+    ========================== -->
+
+    <main class="episodes-container">
+
+
+        <!-- =================================================
+             EPISÓDIO 01
+        ================================================== -->
+
+        <a
+            href="player.html?episode=1"
+            class="episode"
+        >
+
+            <div class="thumbnail">
+
+                <img
+                    src="sfde_media/thumb_1.png"
+                    alt="Episódio 01"
+                >
+
+                <video
+                    class="preview-video"
+                    src=""
+                    muted
+                    loop
+                    playsinline
+                    preload="metadata"
+                ></video>
+
+                <div class="play-icon">
+                    ▶
+                </div>
+
+            </div>
+
+
+            <div class="episode-info">
+
+                <div class="episode-number">
+                    EPISÓDIO 01
+                </div>
+
+                <h2>
+                    SFDE #1
+                </h2>
+
+                <p class="episode-description">
+                    Descrição do primeiro episódio.
+                    Aqui você pode colocar uma pequena
+                    explicação sobre o conteúdo do vídeo.
+                </p>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- =================================================
+             EPISÓDIO 02
+        ================================================== -->
+
+        <a
+    href="player.html?episode=2"
+    class="episode"
+    >
+
+            <div class="thumbnail">
+
+                <img
+                    src="sfde_media/thumb_2.png"
+                    alt="Episódio 02"
+                >
+
+                <video
+                    class="preview-video"
+                    src=""
+                    muted
+                    loop
+                    playsinline
+                    preload="metadata"
+                ></video>
+
+                <div class="play-icon">
+                    ▶
+                </div>
+
+            </div>
+
+
+            <div class="episode-info">
+
+                <div class="episode-number">
+                    EPISÓDIO 02
+                </div>
+
+                <h2>
+                    SFDE #2
+                </h2>
+
+                <p class="episode-description">
+                    Descrição do segundo episódio.
+                    Uma breve introdução ao conteúdo
+                    apresentado neste vídeo.
+                </p>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- =================================================
+             EPISÓDIO 03
+        ================================================== -->
+
+<a
+    href="player.html?episode=3"
+    class="episode"
+>
+
+            <div class="thumbnail">
+
+                <img
+                    src="sfde_media/thumb_3.png"
+                    alt="Episódio 03"
+                >
+
+                <video
+                    class="preview-video"
+                    src=""
+                    muted
+                    loop
+                    playsinline
+                    preload="metadata"
+                ></video>
+
+                <div class="play-icon">
+                    ▶
+                </div>
+
+            </div>
+
+
+            <div class="episode-info">
+
+                <div class="episode-number">
+                    EPISÓDIO 03
+                </div>
+
+                <h2>
+                    SFDE #3
+                </h2>
+
+                <p class="episode-description">
+                    Descrição do terceiro episódio.
+                    Coloque aqui uma pequena descrição
+                    do conteúdo.
+                </p>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- =================================================
+             EPISÓDIO 04
+        ================================================== -->
+
+<a
+    href="player.html?episode=4"
+    class="episode"
+>
+
+            <div class="thumbnail">
+
+                <img
+                    src="sfde_media/thumb_4.png"
+                    alt="Episódio 04"
+                >
+
+                <video
+                    class="preview-video"
+                    src=""
+                    muted
+                    loop
+                    playsinline
+                    preload="metadata"
+                ></video>
+
+                <div class="play-icon">
+                    ▶
+                </div>
+
+            </div>
+
+
+            <div class="episode-info">
+
+                <div class="episode-number">
+                    EPISÓDIO 04
+                </div>
+
+                <h2>
+                    SFDE #4
+                </h2>
+
+                <p class="episode-description">
+                    Descrição do quarto episódio.
+                    Uma pequena descrição sobre o
+                    conteúdo apresentado.
+                </p>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- =================================================
+             EPISÓDIO 05
+        ================================================== -->
+
+<a
+    href="player.html?episode=5"
+    class="episode"
+>
+
+            <div class="thumbnail">
+
+                <img
+                    src="sfde_media/thumb_5.png"
+                    alt="Episódio 05"
+                >
+
+                <video
+                    class="preview-video"
+                    src=""
+                    muted
+                    loop
+                    playsinline
+                    preload="metadata"
+                ></video>
+
+                <div class="play-icon">
+                    ▶
+                </div>
+
+            </div>
+
+
+            <div class="episode-info">
+
+                <div class="episode-number">
+                    EPISÓDIO 05
+                </div>
+
+                <h2>
+                    SFDE #5
+                </h2>
+
+                <p class="episode-description">
+                    Descrição do quinto episódio.
+                    Escreva aqui uma breve introdução
+                    sobre o conteúdo do vídeo.
+                </p>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- =================================================
+             EPISÓDIO 06
+        ================================================== -->
+
+<a
+    href="player.html?episode=6"
+    class="episode"
+>
+
+            <div class="thumbnail">
+
+                <img
+                    src="sfde_media/thumb_6.png"
+                    alt="Episódio 06"
+                >
+
+                <video
+                    class="preview-video"
+                    src=""
+                    muted
+                    loop
+                    playsinline
+                    preload="metadata"
+                ></video>
+
+                <div class="play-icon">
+                    ▶
+                </div>
+
+            </div>
+
+
+            <div class="episode-info">
+
+                <div class="episode-number">
+                    EPISÓDIO 06
+                </div>
+
+                <h2>
+                    SFDE #6
+                </h2>
+
+                <p class="episode-description">
+                    Descrição do sexto episódio.
+                    Coloque aqui uma pequena descrição
+                    sobre o conteúdo apresentado.
+                </p>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- =================================================
+             EPISÓDIO 07
+        ================================================== -->
+
+<a
+    href="player.html?episode=7"
+    class="episode"
+>
+
+            <div class="thumbnail">
+
+                <img
+                    src="sfde_media/thumb_7.png"
+                    alt="Episódio 07"
+                >
+
+                <video
+                    class="preview-video"
+                    src=""
+                    muted
+                    loop
+                    playsinline
+                    preload="metadata"
+                ></video>
+
+                <div class="play-icon">
+                    ▶
+                </div>
+
+            </div>
+
+
+            <div class="episode-info">
+
+                <div class="episode-number">
+                    EPISÓDIO 07
+                </div>
+
+                <h2>
+                    SFDE #7
+                </h2>
+
+                <p class="episode-description">
+                    Descrição do sétimo episódio.
+                    Uma breve descrição sobre o conteúdo
+                    deste episódio.
+                </p>
+
+            </div>
+
+        </a>
+
+
+    </main>
+
+    <audio src="hover mouse intro.mp3" id="hover_audio" preload="auto"></audio>
+    <audio src="GTA V_ Pause Menu _ Main Menu Music - OST Grand Theft Auto (128 kbps).mp3" autoplay id="backgroundMusic"></audio>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+
+        const episodes =
+            document.querySelectorAll(
+                ".episode"
+            );
+
+
+        episodes.forEach(episode => {
+
+
+            const video =
+                episode.querySelector(
+                    ".preview-video"
+                );
+
+
+            /* =========================
+               MOUSE ENTROU
+            ========================== */
+
+            let hover_audio = document.getElementById("hover_audio");
+
+            episode.addEventListener(
+                "mouseenter",
+                () => {
+
+                    hover_audio.play();
+                    hover_audio.volume = 0.05;
+                    
+                    if (!video.src) {
+                        return;
+                    }
+
+                    video.currentTime = 0;
+
+                    video.play()
+                        .catch(() => {});
+
+                }
+            );
+
+
+            /* =========================
+               MOUSE SAIU
+            ========================== */
+
+            episode.addEventListener(
+                "mouseleave",
+                () => {
+
+                    setTimeout(() => {
+
+                        if (
+                            !episode.matches(":hover")
+                        ) {
+
+                            video.pause();
+
+                            video.currentTime = 0;
+
+                        }
+
+                    }, 800);
+
+                }
+            );
+
+        });
+
+        let backgroundMusic = document.getElementById("backgroundMusic");
+        backgroundMusic.volume = 0.2;
+
+    </script>
+
+
+</body>
+
+</html>

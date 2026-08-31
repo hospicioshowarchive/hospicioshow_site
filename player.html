@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SFDE - Player</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 70% 20%,
+                    #111827 0%,
+                    #05070b 45%,
+                    #010204 100%
+                );
+
+            color: white;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================
+           CABEÇALHO
+        ========================== */
+
+        .header {
+
+            height: 90px;
+
+            width: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            padding-left: 50px;
+
+            background:
+                rgba(0,0,0,0.25);
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.05);
+
+            backdrop-filter:
+                blur(10px);
+        }
+
+
+        .back-button {
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 16px;
+
+            opacity: 0.65;
+
+            transition:
+                opacity 0.3s ease,
+
+                transform 0.3s ease;
+        }
+
+
+        .back-button:hover {
+
+            opacity: 1;
+
+            transform:
+                translateX(-4px);
+        }
+
+
+        /* =========================
+           PLAYER
+        ========================== */
+
+        .player-container {
+
+            width: 90%;
+
+            max-width: 1150px;
+
+            margin:
+                45px auto 100px;
+
+            animation:
+                pageEnter 0.8s ease;
+        }
+
+
+        @keyframes pageEnter {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(20px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        /* =========================
+           ÁREA DO IFRAME
+        ========================== */
+
+        .video-wrapper {
+
+            position: relative;
+
+            width: 100%;
+
+            aspect-ratio: 16 / 9;
+
+            background: black;
+
+            border-radius: 8px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 25px 70px
+                rgba(0,0,0,0.65);
+        }
+
+
+        .video-wrapper iframe {
+
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            border: none;
+        }
+
+
+        /* =========================
+           INFORMAÇÕES
+        ========================== */
+
+        .video-info {
+
+            margin-top: 25px;
+        }
+
+
+        .video-info h1 {
+
+            font-size: 27px;
+
+            font-weight: 400;
+
+            margin-bottom: 10px;
+        }
+
+
+        .video-info p {
+
+            max-width: 800px;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+
+            color:
+                rgba(255,255,255,0.45);
+        }
+
+
+        /* =========================
+           RESPONSIVO
+        ========================== */
+
+        @media (max-width: 700px) {
+
+            .header {
+
+                padding-left: 25px;
+            }
+
+
+            .player-container {
+
+                width: 95%;
+
+                margin-top: 25px;
+            }
+
+
+            .video-info h1 {
+
+                font-size: 21px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         CABEÇALHO
+    ========================== -->
+
+    <header class="header">
+
+        <a
+            href="sfde.html"
+            class="back-button"
+        >
+
+            ← Voltar para SFDE
+
+        </a>
+
+    </header>
+
+
+
+    <!-- =========================
+         PLAYER
+    ========================== -->
+
+    <main class="player-container">
+
+
+        <div class="video-wrapper">
+
+            <iframe
+                id="videoPlayer"
+                src=""
+                allowfullscreen
+                webkitallowfullscreen
+                mozallowfullscreen
+            ></iframe>
+
+        </div>
+
+
+        <div class="video-info">
+
+            <h1 id="videoTitle">
+                SFDE
+            </h1>
+
+
+            <p id="videoDescription">
+                Episódio do SFDE.
+            </p>
+
+        </div>
+
+
+    </main>
+
+
+
+    <script>
+
+
+        /* =====================================================
+           EPISÓDIOS
+
+           COLOQUE A URL DO PLAYER DO INTERNET ARCHIVE
+           NO "src" DE CADA EPISÓDIO.
+        ===================================================== */
+
+
+        const episodes = {
+
+
+            "1": {
+
+                src: "https://archive.org/embed/sfde-1_202608",
+
+                title:
+                    "Título do primeiro episódio",
+
+                description:
+                    "Descrição do primeiro episódio."
+
+            },
+
+
+            "2": {
+
+                src: "https://archive.org/embed/sfde_2",
+
+                title:
+                    "Título do segundo episódio",
+
+                description:
+                    "Descrição do segundo episódio."
+
+            },
+
+
+            "3": {
+
+                src: "https://archive.org/embed/sfde_3",
+
+                title:
+                    "Título do terceiro episódio",
+
+                description:
+                    "Descrição do terceiro episódio."
+
+            },
+
+
+            "4": {
+
+                src: "https://archive.org/embed/sfde-4",
+
+                title:
+                    "Título do quarto episódio",
+
+                description:
+                    "Descrição do quarto episódio."
+
+            },
+
+
+            "5": {
+
+                src: "https://archive.org/embed/sfde-5",
+
+                title:
+                    "Título do quinto episódio",
+
+                description:
+                    "Descrição do quinto episódio."
+
+            },
+
+
+            "6": {
+
+                src: "https://archive.org/embed/sfde-6",
+
+                title:
+                    "Título do sexto episódio",
+
+                description:
+                    "Descrição do sexto episódio."
+
+            },
+
+
+            "7": {
+
+                src: "https://archive.org/embed/sfde-7",
+
+                title:
+                    "Título do sétimo episódio",
+
+                description:
+                    "Descrição do sétimo episódio."
+
+            }
+
+        };
+
+
+
+        /* =====================================================
+           PEGAR O EPISÓDIO CLICADO
+        ===================================================== */
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const episodeNumber =
+            params.get("episode");
+
+
+        const videoPlayer =
+            document.getElementById(
+                "videoPlayer"
+            );
+
+
+        const videoTitle =
+            document.getElementById(
+                "videoTitle"
+            );
+
+
+        const videoDescription =
+            document.getElementById(
+                "videoDescription"
+            );
+
+
+
+        /* =====================================================
+           CARREGAR EPISÓDIO
+        ===================================================== */
+
+        if (
+            episodeNumber &&
+            episodes[episodeNumber]
+        ) {
+
+
+            const episode =
+                episodes[episodeNumber];
+
+
+            videoPlayer.src =
+                episode.src;
+
+
+            videoTitle.textContent =
+                episode.title;
+
+
+            videoDescription.textContent =
+                episode.description;
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

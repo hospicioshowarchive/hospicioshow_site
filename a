@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meu Canal</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            overflow: hidden;
+
+            font-family: "Segoe UI", Arial, sans-serif;
+
+            color: white;
+
+            background:
+                radial-gradient(
+                    circle at 50% 45%,
+                    #102c5c 0%,
+                    #071936 35%,
+                    #020817 75%,
+                    #01040c 100%
+                );
+
+            position: relative;
+        }
+
+
+        /* =========================
+           FUNDO
+        ========================== */
+
+        .background {
+
+            position: fixed;
+            inset: 0;
+
+            overflow: hidden;
+
+            z-index: -1;
+        }
+
+
+        .wave {
+
+            position: absolute;
+
+            width: 120%;
+            height: 250px;
+
+            border-radius: 50%;
+
+            border-top:
+                2px solid rgba(70, 150, 255, 0.25);
+
+            filter: blur(1px);
+
+            transform: rotate(-8deg);
+
+            animation:
+                waveMove 12s ease-in-out infinite alternate;
+        }
+
+
+        .wave:nth-child(1) {
+
+            top: 15%;
+            left: -10%;
+        }
+
+
+        .wave:nth-child(2) {
+
+            top: 42%;
+            left: -5%;
+
+            animation-duration: 16s;
+            animation-delay: -3s;
+        }
+
+
+        .wave:nth-child(3) {
+
+            top: 70%;
+            left: -15%;
+
+            animation-duration: 20s;
+            animation-delay: -7s;
+        }
+
+
+        @keyframes waveMove {
+
+            0% {
+
+                transform:
+                    translateX(-5%)
+                    rotate(-8deg);
+            }
+
+            100% {
+
+                transform:
+                    translateX(8%)
+                    rotate(-5deg);
+            }
+        }
+
+
+        /* =========================
+           PARTÍCULAS
+        ========================== */
+
+        .particle {
+
+            position: absolute;
+
+            width: 4px;
+            height: 4px;
+
+            background:
+                rgba(100, 170, 255, 0.5);
+
+            border-radius: 50%;
+
+            animation:
+                float 8s infinite ease-in-out;
+        }
+
+
+        .p1 {
+            left: 10%;
+            top: 20%;
+        }
+
+        .p2 {
+            left: 25%;
+            top: 70%;
+            animation-delay: -2s;
+        }
+
+        .p3 {
+            left: 67%;
+            top: 30%;
+            animation-delay: -5s;
+        }
+
+        .p4 {
+            left: 85%;
+            top: 65%;
+            animation-delay: -3s;
+        }
+
+        .p5 {
+            left: 55%;
+            top: 80%;
+            animation-delay: -6s;
+        }
+
+
+        @keyframes float {
+
+            0%, 100% {
+
+                opacity: 0.2;
+
+                transform:
+                    translateY(0);
+            }
+
+            50% {
+
+                opacity: 0.8;
+
+                transform:
+                    translateY(-30px);
+            }
+        }
+
+
+        /* =========================
+           CONTEÚDO
+        ========================== */
+
+        .container {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 40px;
+
+            animation:
+                pageEnter 1.5s ease forwards;
+        }
+
+
+        @keyframes pageEnter {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(25px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        /* =========================
+           TÍTULO
+        ========================== */
+
+        .welcome {
+
+            text-align: center;
+
+            margin-bottom: 55px;
+        }
+
+
+        .welcome h1 {
+
+            font-size: 42px;
+
+            font-weight: 300;
+
+            letter-spacing: 8px;
+
+            margin-bottom: 15px;
+
+            text-shadow:
+                0 0 20px
+                rgba(100, 170, 255, 0.25);
+        }
+
+
+        .welcome p {
+
+            font-size: 19px;
+
+            font-weight: 300;
+
+            letter-spacing: 2px;
+
+            color:
+                rgba(255, 255, 255, 0.65);
+        }
+
+
+        /* =========================
+           CANAIS
+        ========================== */
+
+        .channels {
+
+            display: flex;
+
+            gap: 65px;
+
+            justify-content: center;
+
+            align-items: flex-start;
+
+            width: 100%;
+
+            max-width: 1250px;
+        }
+
+
+        .channel {
+
+            width: 500px;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            text-decoration: none;
+
+            color: white;
+
+            transition:
+                transform
+                0.5s
+                cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+
+        /* =========================
+           ÁREA DA IMAGEM / VÍDEO
+        ========================== */
+
+        .channel-image {
+
+            width: 100%;
+
+            aspect-ratio: 16 / 9;
+
+            overflow: hidden;
+
+            position: relative;
+
+            border-radius: 12px;
+
+            border:
+                1px solid
+                rgba(150, 200, 255, 0.45);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,0.08),
+                    rgba(255,255,255,0.02)
+                );
+
+            box-shadow:
+
+                0 10px 40px
+                rgba(0, 0, 0, 0.4),
+
+                inset 0 0 30px
+                rgba(100, 160, 255, 0.05);
+
+            transition:
+
+                box-shadow
+                0.5s ease,
+
+                border-color
+                0.5s ease;
+        }
+
+
+        /* =========================
+           IMAGEM
+        ========================== */
+
+        .channel-image img {
+
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+            transition:
+
+                transform
+                0.7s
+                cubic-bezier(0.2, 0.8, 0.2, 1),
+
+                filter
+                0.5s ease;
+        }
+
+
+        /* =========================
+           VÍDEO DO SFDE
+        ========================== */
+
+        .sfde-video {
+
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            /*
+                Começa completamente invisível.
+            */
+
+            opacity: 0;
+
+            /*
+                O vídeo fica sobre a imagem.
+            */
+
+            z-index: 2;
+
+            /*
+                Impede o vídeo de interferir
+                com o mouse.
+            */
+
+            pointer-events: none;
+
+            /*
+                Essa é a animação de entrada/saída.
+            */
+
+            transition:
+                opacity 0.8s ease;
+        }
+
+
+        /*
+            Quando o mouse estiver sobre o SFDE,
+            o vídeo fica visível.
+        */
+
+        .sfde:hover .sfde-video {
+
+            opacity: 1;
+        }
+
+
+        /*
+            Quando o vídeo aparece,
+            a imagem original também recebe
+            um pequeno escurecimento.
+        */
+
+        .sfde:hover .channel-image img {
+
+            transform: scale(1.025);
+
+            filter: brightness(0.65);
+        }
+
+
+        /* =========================
+           HOVER DOS QUADROS
+        ========================== */
+
+        .channel:hover {
+
+            transform:
+                scale(1.035);
+        }
+
+
+        .channel:hover .channel-image {
+
+            border-color:
+                rgba(180, 220, 255, 0.9);
+
+            box-shadow:
+
+                0 20px 60px
+                rgba(0, 0, 0, 0.55),
+
+                0 0 35px
+                rgba(50, 130, 255, 0.18);
+        }
+
+
+        /*
+            Zoom normal do Autismo Cast.
+        */
+
+        .channel:not(.sfde):hover .channel-image img {
+
+            transform:
+                scale(1.025);
+
+            filter:
+                brightness(1.08);
+        }
+
+
+        /* =========================
+           NOME DO CANAL
+        ========================== */
+
+        .channel-name {
+
+            margin-top: 20px;
+
+            font-size: 24px;
+
+            font-weight: 300;
+
+            letter-spacing: 2px;
+
+            color:
+                rgba(255, 255, 255, 0.9);
+
+            transition:
+
+                color
+                0.4s ease,
+
+                text-shadow
+                0.4s ease;
+        }
+
+
+        .channel:hover .channel-name {
+
+            color: white;
+
+            text-shadow:
+                0 0 15px
+                rgba(130, 190, 255, 0.4);
+        }
+
+
+        /* =========================
+           RODAPÉ
+        ========================== */
+
+        .footer {
+
+            position: absolute;
+
+            bottom: 35px;
+
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+
+            font-size: 14px;
+
+            letter-spacing: 3px;
+
+            color:
+                rgba(150, 190, 240, 0.55);
+
+            white-space: nowrap;
+        }
+
+
+        /* =========================
+           RESPONSIVIDADE
+        ========================== */
+
+        @media (max-width: 900px) {
+
+            body {
+                overflow-y: auto;
+            }
+
+
+            .container {
+
+                padding:
+                    30px 20px 100px;
+            }
+
+
+            .channels {
+
+                flex-direction: column;
+
+                align-items: center;
+
+                gap: 40px;
+            }
+
+
+            .channel {
+
+                width:
+                    min(90vw, 500px);
+            }
+
+
+            .welcome {
+
+                margin-bottom: 35px;
+            }
+
+
+            .welcome h1 {
+
+                font-size: 32px;
+
+                letter-spacing: 5px;
+            }
+
+
+            .welcome p {
+
+                font-size: 15px;
+            }
+
+
+            .footer {
+
+                position: relative;
+
+                bottom: auto;
+
+                margin-top: 50px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==================================================
+         MÚSICA DE FUNDO
+
+         COLOQUE O CAMINHO DO ÁUDIO NO SRC
+
+         Exemplo:
+
+         src="audio/musica.mp3"
+    =================================================== -->
+
+    <audio
+        id="backgroundMusic"
+        src="PlayStation 4 System Music - Home Menu - SpongeFreakDX (youtube).mp3"
+        loop
+        preload="auto">
+    </audio>
+
+
+    <!-- ==================================================
+         SOM DO HOVER
+
+         COLOQUE O CAMINHO DO ÁUDIO NO SRC
+
+         Exemplo:
+
+         src="audio/hover.mp3"
+    =================================================== -->
+
+    <audio
+        id="hoverSound"
+        src="hover mouse intro.mp3"
+        preload="auto">
+    </audio>
+
+
+
+    <!-- =========================
+         FUNDO
+    ========================== -->
+
+    <div class="background">
+
+        <div class="wave"></div>
+
+        <div class="wave"></div>
+
+        <div class="wave"></div>
+
+
+        <div class="particle p1"></div>
+
+        <div class="particle p2"></div>
+
+        <div class="particle p3"></div>
+
+        <div class="particle p4"></div>
+
+        <div class="particle p5"></div>
+
+    </div>
+
+
+
+    <!-- =========================
+         CONTEÚDO
+    ========================== -->
+
+    <main class="container">
+
+
+        <div class="welcome">
+
+            <h1>
+                Boas-Vindas Viajante..
+            </h1>
+
+            <p>
+                Escolha um quadro para explorar
+            </p>
+
+        </div>
+
+
+
+        <div class="channels">
+
+
+            <!-- ==========================================
+                 AUTISMO CAST
+            =========================================== -->
+
+            <a
+                href="#"
+                class="channel"
+                data-channel="Autismo Cast"
+            >
+
+                <div class="channel-image">
+
+                    <!--
+                        IMAGEM DO AUTISMO CAST
+
+                        Exemplo:
+
+                        src="img/autismo-cast.jpg"
+                    -->
+
+                    <img
+                        src="autismCastLogoPNG.PNG"
+                        alt="Autismo Cast"
+                    >
+
+                </div>
+
+
+                <div class="channel-name">
+
+                    Autismo Cast
+
+                </div>
+
+            </a>
+
+
+
+            <!-- ==========================================
+                 SFDE
+            =========================================== -->
+
+            <a
+                href="#"
+                class="channel sfde"
+                data-channel="SFDE"
+            >
+
+                <div class="channel-image">
+
+
+                    <!--
+                        IMAGEM ORIGINAL DO SFDE
+
+                        Ela fica por baixo do vídeo.
+
+                        Exemplo:
+
+                        src="img/sfde.jpg"
+                    -->
+
+                    <img
+                        src="se_fode_ae_logo.png"
+                        alt="SFDE"
+                    >
+
+
+                    <!--
+                        ==================================
+                        VÍDEO DE PLACEHOLDER DO SFDE
+                        ==================================
+
+                        COLOQUE O VÍDEO NO SRC.
+
+                        Exemplo:
+
+                        src="videos/sfde-preview.mp4"
+
+                        muted:
+                        necessário para autoplay.
+
+                        loop:
+                        vídeo fica repetindo enquanto
+                        o mouse estiver em cima.
+
+                        playsinline:
+                        melhora comportamento em celulares.
+                    -->
+
+                    <video
+                        class="sfde-video"
+                        src="render1.mp4"
+                        muted
+                        loop
+                        playsinline
+                        preload="metadata">
+                    </video>
+
+
+                </div>
+
+
+                <div class="channel-name">
+
+                    SFDE
+
+                </div>
+
+            </a>
+
+
+        </div>
+
+
+
+        <div class="footer">
+
+            Querido fan, aproveite e se divirta.
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+
+        /* =========================================
+           ÁUDIOS
+        ========================================== */
+
+        const backgroundMusic =
+            document.getElementById(
+                "backgroundMusic"
+            );
+
+
+        const hoverSound =
+            document.getElementById(
+                "hoverSound"
+            );
+
+
+        let musicStarted = false;
+
+
+        function startMusic() {
+
+            if (musicStarted) {
+                return;
+            }
+
+
+            if (!backgroundMusic.src) {
+                return;
+            }
+
+
+            backgroundMusic.volume = 0.25;
+
+
+            backgroundMusic
+                .play()
+                .then(() => {
+
+                    musicStarted = true;
+
+                })
+                .catch(() => {
+
+                });
+
+        }
+
+
+        document.addEventListener(
+            "click",
+            startMusic,
+            { once: true }
+        );
+
+
+        document.addEventListener(
+            "mousemove",
+            startMusic,
+            { once: true }
+        );
+
+
+
+        /* =========================================
+           CANAIS
+        ========================================== */
+
+        const channels =
+            document.querySelectorAll(
+                ".channel"
+            );
+
+
+
+        /* =========================================
+           SOM DE HOVER
+        ========================================== */
+
+        channels.forEach(channel => {
+
+
+            channel.addEventListener(
+                "mouseenter",
+                () => {
+
+                    if (!hoverSound.src) {
+                        return;
+                    }
+
+
+                    hoverSound.currentTime = 0;
+
+                    hoverSound.volume = 0.35;
+
+
+                    hoverSound
+                        .play()
+                        .catch(() => {});
+
+                }
+            );
+
+        });
+
+
+
+        /* =========================================
+           VÍDEO DO SFDE
+        ========================================== */
+
+        const sfde =
+            document.querySelector(
+                ".sfde"
+            );
+
+
+        const sfdeVideo =
+            document.querySelector(
+                ".sfde-video"
+            );
+
+
+        /*
+            Quando o mouse entra no SFDE:
+        */
+
+        sfde.addEventListener(
+            "mouseenter",
+            () => {
+
+                /*
+                    Começa o vídeo.
+
+                    O CSS controla o fade-in.
+                */
+
+                if (sfdeVideo.src) {
+
+                    sfdeVideo
+                        .play()
+                        .catch(() => {});
+
+                }
+
+            }
+        );
+
+
+        /*
+            Quando o mouse sai:
+        */
+
+        sfde.addEventListener(
+            "mouseleave",
+            () => {
+
+                /*
+                    Primeiro deixamos o CSS
+                    fazer o fade-out.
+
+                    Depois de 800ms,
+                    paramos o vídeo.
+                */
+
+                setTimeout(() => {
+
+                    if (!sfde.matches(":hover")) {
+
+                        sfdeVideo.pause();
+
+                        /*
+                            Volta para o começo
+                            para o próximo hover.
+                        */
+
+                        sfdeVideo.currentTime = 0;
+
+                    }
+
+                }, 800);
+
+            }
+        );
+
+
+
+        /* =========================================
+           CLIQUE NOS CANAIS
+        ========================================== */
+
+        channels.forEach(channel => {
+
+            channel.addEventListener(
+                "click",
+                event => {
+
+                    event.preventDefault();
+
+
+                    const canal =
+                        channel.dataset.channel;
+
+
+                    if (canal === "Autismo Cast") {
+
+                        /*
+                            FUTURAMENTE:
+
+                            window.location.href =
+                            "autismo-cast.html";
+                        */
+
+                        console.log(
+                            "Autismo Cast selecionado"
+                        );
+
+                    }
+
+
+                    if (canal === "SFDE") {
+
+                        /*
+                            FUTURAMENTE:
+
+                            window.location.href =
+                            "sfde.html";
+                        */
+
+                        console.log(
+                            "SFDE selecionado"
+                        );
+
+                    }
+
+                }
+            );
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>
